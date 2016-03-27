@@ -20,7 +20,10 @@
 %
 % In order to use this LaTeX class, place it into your local TEXMF
 % tree. By default, this should be ~/.texmf/tex/latex for a TeXLive
-% distribution.
+% distribution. You need to install the linux-libertine font family
+% package (or use the defaultfont option documented below). The
+% Libertine fonts are available as a package in any major Linux
+% distribtion's repositories.
 %
 % This class includes several packages by default so you don't have to
 % call \usepackage for them. The important ones from a user's point
@@ -36,6 +39,14 @@
 % graphics with \includegraphics. That command works fine with
 % PNG, GIF and JPEG image files. For including an entire PDF document,
 % use \includepdf.
+%
+% This class provides the following options additionally to those
+% of scrartcl:
+%
+% [defaultfont]
+%   Use this option if you can't install the Libertine/Biolinum font
+%   families, which this class makes use of. It will then use LaTeX's
+%   default font to typeset the document.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Identification part
@@ -46,7 +57,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Declaration of options
 
-\PassOptionsToClass{11pt,paper=letter}{scrartcl}
+\RequirePackage{ifthen}
+
+\newboolean{usedefault@font}
+\setboolean{usedefault@font}{false}
+
+\DeclareOption{defaultfont}{\setboolean{usedefault@font}{true}}
+\PassOptionsToClass{11pt}{scrartcl}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,7 +81,7 @@
 \RequirePackage{fontspec}
 \RequirePackage{calc}
 \RequirePackage{lastpage}
-\RequirePackage[top=2cm,bottom=3cm,left=2cm,right=2cm]{geometry}
+\RequirePackage[letterpaper,top=2cm,bottom=3cm,left=2cm,right=2cm]{geometry}
 \RequirePackage{graphicx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -133,3 +150,9 @@
 \lohead{TSC}
 \cohead{\@author, \@title}
 \rohead{DNr. \@docnr}
+
+% Font to use
+\ifthenelse{\boolean{usedefault@font}}{}{
+  \setmainfont{Linux Libertine O}
+  \setsansfont{Linux Biolinum O}
+}
