@@ -34,11 +34,12 @@
 % * calc
 % * lastpage
 % * graphicx
+% * pdfpages
 %
 % The inclusion of the 'graphicx' packages means you can include
 % graphics with \includegraphics. That command works fine with
 % PNG, GIF and JPEG image files. For including an entire PDF document,
-% use \includepdf.
+% use \includepdf (from the 'pdfpages' package).
 %
 % This class provides the following options additionally to those
 % of scrartcl:
@@ -83,6 +84,7 @@
 \RequirePackage{lastpage}
 \RequirePackage[letterpaper,top=2cm,bottom=3cm,left=2cm,right=2cm]{geometry}
 \RequirePackage{graphicx}
+\RequirePackage{pdfpages}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start of the real code
